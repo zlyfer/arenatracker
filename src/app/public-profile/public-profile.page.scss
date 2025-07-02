@@ -1,0 +1,127 @@
+:host {
+  display: block;
+  background: transparent;
+  overflow: hidden;
+}
+
+.public-profile {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  background: transparent;
+  display: inline-block;
+  width: auto;
+  max-width: 380px;
+}
+
+.progress-bar {
+  width: 332px;
+  height: 20px;
+  background: #595959;
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+  border-radius: 25px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  color: white;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.champion-grid {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.champion-grid .champ-card {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  position: relative;
+  cursor: default;
+  transition: transform 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.champion-grid .champ-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.champion-grid .champ-card.owned {
+  border: 2px solid #4CAF50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.champion-grid .champ-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #ccc;
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  border-top-color: #4CAF50;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  text-align: center;
+  padding: 20px;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .public-profile {
+    padding: 10px;
+  }
+
+  .champion-grid .champ-card {
+    width: 50px;
+    height: 50px;
+  }
+}

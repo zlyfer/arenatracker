@@ -1,0 +1,27 @@
+<div class="public-profile">
+  <div class="progress-bar">
+    <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+    <div class="progress-text">{{ getProgressText() }}</div>
+  </div>
+
+  <div class="champion-grid" *ngIf="!isLoading && !errorMessage && lastFiveChampions.length > 0">
+    <div
+      class="champ-card owned"
+      *ngFor="let champion of lastFiveChampions"
+      [style.backgroundImage]="'url(' + getChampionImageUrl(champion) + ')'">
+      <div class="overlay"></div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    Loading champion collection...
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="error-message" *ngIf="!isLoading && !errorMessage && lastFiveChampions.length === 0">
+    No champions unlocked yet
+  </div>
+</div>

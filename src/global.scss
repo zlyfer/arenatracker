@@ -35,3 +35,57 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Global CSS Variables for Theme Support */
+:root {
+  --bg-clr: #f0f0f0;
+  --bg-color2: #f0f0f0dd;
+  --bg-color3: #eeea;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --border-clr: #ddd;
+  --button-bg: #f4f4f499;
+  --button-hover: #e0e0e099;
+  --primary-color: 10, 124, 255;
+  --clear-search-btn: rgba(0, 0, 0, 0.08);
+  --clear-search-btn-hover: rgba(0, 0, 0, 0.13);
+
+  /* Color variables */
+  --green-color: 76, 175, 80;
+  --green-hover-color: 69, 160, 73;
+  --red-color: 255, 107, 107;
+  --red-hover-color: 255, 82, 82;
+}
+
+[data-theme="dark"] {
+  --bg-color: #222;
+  --bg-color2: #222d;
+  --card-bg: #333;
+  --text-color: #eee;
+  --border-clr: #444;
+  --button-bg: #4449;
+  --button-hover: #5559;
+  --primary-color: 26, 140, 255;
+  --clear-search-btn: rgba(255, 255, 255, 0.1);
+  --clear-search-btn-hover: rgba(255, 255, 255, 0.13);
+
+  /* Color variables */
+  --green-color: 76, 175, 80;
+  --green-hover-color: 69, 160, 73;
+  --red-color: 255, 107, 107;
+  --red-hover-color: 255, 82, 82;
+}
+
+/* Global Styles */
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');

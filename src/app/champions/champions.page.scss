@@ -208,34 +208,34 @@
   --color: white;
 }
 
-.public-toggle-btn {
+.overlay-toggle-btn {
   --border-radius: 4px 0 0 4px;
 }
 
-.public-toggle-btn.public {
+.overlay-toggle-btn.public {
   --background: rgba(var(--green-color), 0.5);
   --border-color: rgb(var(--green-color));
   --color: white;
 }
 
-.public-toggle-btn.public:hover {
+.overlay-toggle-btn.public:hover {
   --background: rgba(var(--green-hover-color), 0.5);
   --border-color: rgb(var(--green-hover-color));
 }
 
-.public-toggle-btn.private {
+.overlay-toggle-btn.private {
   --background: rgba(var(--red-color), 0.5);
   --border-color: rgb(var(--red-color));
   --color: white;
   --border-radius: 4px;
 }
 
-.public-toggle-btn.private:hover {
+.overlay-toggle-btn.private:hover {
   --background: rgba(var(--red-hover-color), 0.5);
   --border-color: rgb(var(--red-hover-color));
 }
 
-.public-profile-visit-btn {
+.overlay-visit-btn {
   font-size: 16px;
   margin-left: -10px;
   --border-radius: 0 4px 4px 0;
@@ -247,12 +247,12 @@
   --color: white;
 }
 
-.public-profile-visit-btn:hover {
+.overlay-visit-btn:hover {
   --background: rgba(var(--primary-color), 0.5);
   --border-color: rgba(var(--primary-color), 0.5);
 }
 
-.public-toggle-btn.private + .public-profile-visit-btn {
+.overlay-toggle-btn.private + .overlay-visit-btn {
   --background: rgba(var(--red-color), 0.5);
   --border-color: rgb(var(--red-color));
 }

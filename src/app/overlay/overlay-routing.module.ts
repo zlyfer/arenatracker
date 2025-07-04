@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PublicProfilePage } from './public-profile.page';
+import { OverlayPage } from './overlay.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PublicProfilePage
+    component: OverlayPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PublicProfilePageRoutingModule {}
+export class OverlayPageRoutingModule {}

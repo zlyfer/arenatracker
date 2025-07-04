@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,6 +15,7 @@ export interface User {
 export interface LoginResponse {
   success: boolean;
   message: string;
+  token?: string;
   user: User | null;
 }
 
@@ -22,23 +23,26 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_BASE_URL = 'http://localhost:8080/lolarena';
+  private readonly API_BASE_URL = 'http://localhost:8080/arenatracker';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+  private tokenKey = 'arenaTrackerToken';
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
   }
 
   private loadUserFromStorage(): void {
-    const savedUser = localStorage.getItem('lolArenaUser');
-    if (savedUser) {
+    const savedUser = localStorage.getItem('arenaTrackerUser');
+    const token = localStorage.getItem(this.tokenKey);
+
+    if (savedUser && token) {
       try {
         const user = JSON.parse(savedUser);
         this.currentUserSubject.next(user);
       } catch (e) {
         console.error('Error parsing saved user', e);
-        localStorage.removeItem('lolArenaUser');
+        this.clearAuth();
       }
     }
   }
@@ -57,8 +61,9 @@ export class AuthService {
         password: hashHex
       }).pipe(
         map(response => {
-          if (response.success && response.user) {
-            localStorage.setItem('lolArenaUser', JSON.stringify(response.user));
+          if (response.success && response.user && response.token) {
+            localStorage.setItem('arenaTrackerUser', JSON.stringify(response.user));
+            localStorage.setItem(this.tokenKey, response.token);
             this.currentUserSubject.next(response.user);
           }
           return response;
@@ -72,7 +77,12 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('lolArenaUser');
+    this.clearAuth();
+  }
+
+  private clearAuth(): void {
+    localStorage.removeItem('arenaTrackerUser');
+    localStorage.removeItem(this.tokenKey);
     this.currentUserSubject.next(null);
   }
 
@@ -81,6 +91,31 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.currentUserSubject.value !== null;
+    return this.currentUserSubject.value !== null && this.getToken() !== null;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  // Check if token is expired
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 < Date.now();
+    } catch (e) {
+      return true;
+    }
   }
 }

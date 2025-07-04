@@ -4,12 +4,12 @@ import { Subscription, interval } from 'rxjs';
 import { ChampionService, PublicUserResponse } from '../services/champion.service';
 
 @Component({
-  selector: 'app-public-profile',
-  templateUrl: './public-profile.page.html',
-  styleUrls: ['./public-profile.page.scss'],
+  selector: 'app-overlay',
+  templateUrl: './overlay.page.html',
+  styleUrls: ['./overlay.page.scss'],
   standalone: false
 })
-export class PublicProfilePage implements OnInit, OnDestroy {
+export class OverlayPage implements OnInit, OnDestroy {
   username: string = '';
   user: any = null;
   champions: string[] = [];

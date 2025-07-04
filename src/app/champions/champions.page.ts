@@ -117,22 +117,22 @@ export class ChampionsPage implements OnInit, OnDestroy {
     }
 
     // Update localStorage and auth service immediately
-    localStorage.setItem('lolArenaUser', JSON.stringify(this.currentUser));
+    localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
     this.authService['currentUserSubject'].next(this.currentUser);
 
     // Make API call in background
     this.subscriptions.push(
-      this.championService.toggleChampion(this.currentUser.id, champion).subscribe({
+      this.championService.toggleChampion(champion).subscribe({
         next: (response) => {
           if (response.success) {
             // API call successful, update with server response
             this.currentUser!.champs = response.champions;
-            localStorage.setItem('lolArenaUser', JSON.stringify(this.currentUser));
+            localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
             this.authService['currentUserSubject'].next(this.currentUser);
           } else {
             // Revert on error
             this.currentUser!.champs = originalChamps;
-            localStorage.setItem('lolArenaUser', JSON.stringify(this.currentUser));
+            localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
             this.authService['currentUserSubject'].next(this.currentUser);
             console.error('Error toggling champion:', response.message);
           }
@@ -142,7 +142,7 @@ export class ChampionsPage implements OnInit, OnDestroy {
         error: (error) => {
           // Revert on error
           this.currentUser!.champs = originalChamps;
-          localStorage.setItem('lolArenaUser', JSON.stringify(this.currentUser));
+          localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
           this.authService['currentUserSubject'].next(this.currentUser);
           console.error('Error toggling champion:', error);
           // Remove from loading set
@@ -180,11 +180,11 @@ export class ChampionsPage implements OnInit, OnDestroy {
     this.isPublicStateSwitching = true;
 
     this.subscriptions.push(
-      this.championService.setPublicState(this.currentUser.id, !this.currentUser.public).subscribe({
+      this.championService.setPublicState(!this.currentUser.public).subscribe({
         next: (response) => {
           if (response.success) {
             this.currentUser!.public = response.public;
-            localStorage.setItem('lolArenaUser', JSON.stringify(this.currentUser));
+            localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
             this.authService['currentUserSubject'].next(this.currentUser);
           }
           this.isPublicStateSwitching = false;
@@ -199,7 +199,7 @@ export class ChampionsPage implements OnInit, OnDestroy {
 
   openPublicProfile() {
     if (this.currentUser?.username) {
-      const publicProfileUrl = `${window.location.origin}/public-profile?username=${encodeURIComponent(this.currentUser.username)}`;
+      const publicProfileUrl = `${window.location.origin}/overlay?username=${encodeURIComponent(this.currentUser.username)}`;
       window.open(publicProfileUrl, '_blank');
     }
   }

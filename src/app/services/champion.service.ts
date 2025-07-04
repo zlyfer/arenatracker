@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface ChampionResponse {
   success: boolean;
@@ -36,27 +37,35 @@ export interface PublicUserResponse {
   providedIn: 'root'
 })
 export class ChampionService {
-  private readonly API_BASE_URL = 'http://localhost:8080/lolarena';
+  private readonly API_BASE_URL = 'http://localhost:8080/arenatracker';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 
   getChampions(): Observable<ChampionResponse> {
     return this.http.get<ChampionResponse>(`${this.API_BASE_URL}/champions`);
   }
 
-  toggleChampion(userId: number, championName: string): Observable<ToggleChampionResponse> {
-    const formData = new FormData();
-    formData.append('userId', userId.toString());
-    formData.append('championName', championName);
+  toggleChampion(championName: string): Observable<ToggleChampionResponse> {
+    const headers = this.authService.getAuthHeaders();
 
-    return this.http.post<ToggleChampionResponse>(`${this.API_BASE_URL}/toggle-champion`, formData);
+    return this.http.post<ToggleChampionResponse>(
+      `${this.API_BASE_URL}/toggle-champion`,
+      { championName },
+      { headers }
+    );
   }
 
-  setPublicState(userId: number, isPublic: boolean): Observable<PublicStateResponse> {
-    return this.http.post<PublicStateResponse>(`${this.API_BASE_URL}/set-public-state`, {
-      userId,
-      public: isPublic
-    });
+  setPublicState(isPublic: boolean): Observable<PublicStateResponse> {
+    const headers = this.authService.getAuthHeaders();
+
+    return this.http.post<PublicStateResponse>(
+      `${this.API_BASE_URL}/set-public-state`,
+      { public: isPublic },
+      { headers }
+    );
   }
 
   getPublicUser(username: string): Observable<PublicUserResponse> {

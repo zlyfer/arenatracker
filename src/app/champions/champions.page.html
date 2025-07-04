@@ -9,7 +9,7 @@
     </div>
 
     <ion-button
-      class="public-toggle-btn topbar-btn"
+      class="overlay-toggle-btn topbar-btn"
       [class.public]="currentUser?.public"
       [class.private]="!currentUser?.public"
       fill="clear"
@@ -19,7 +19,7 @@
     </ion-button>
 
     <ion-button
-      class="public-profile-visit-btn topbar-btn"
+      class="overlay-visit-btn topbar-btn"
       *ngIf="currentUser?.public"
       fill="clear"
       (click)="openPublicProfile()"

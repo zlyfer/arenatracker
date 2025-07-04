@@ -12,12 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'champions',
+    path: 'home',
     loadChildren: () => import('./champions/champions.module').then(m => m.ChampionsPageModule)
   },
   {
-    path: 'public-profile',
-    loadChildren: () => import('./public-profile/public-profile.module').then(m => m.PublicProfilePageModule)
+    path: 'overlay',
+    loadChildren: () => import('./overlay/overlay.module').then(m => m.OverlayPageModule)
   }
 ];
 

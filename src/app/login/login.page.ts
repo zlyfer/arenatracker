@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     // Check if user is already logged in
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/champions']);
+      this.router.navigate(['/home']);
     }
   }
 
@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       const response = await this.authService.login(this.username, this.password);
 
       if (response.success) {
-        this.router.navigate(['/champions']);
+        this.router.navigate(['/home']);
       } else {
         this.errorMessage = response.message || 'Login failed';
       }

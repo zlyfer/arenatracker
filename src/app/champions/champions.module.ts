@@ -5,13 +5,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { ChampionsPageRoutingModule } from './champions-routing.module';
 import { ChampionsPage } from './champions.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChampionsPageRoutingModule
+    ChampionsPageRoutingModule,
+    SharedModule
   ],
   declarations: [ChampionsPage]
 })

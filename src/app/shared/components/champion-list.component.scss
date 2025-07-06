@@ -1,0 +1,256 @@
+.champion-list-container {
+  width: 100%;
+  overflow-y: auto;
+
+  .controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 250px;
+
+      .search-bar {
+        --background: var(--card-bg);
+        --color: var(--text-color);
+        --placeholder-color: var(--text-color);
+        padding: 8px 16px;
+        min-width: 200px;
+        font-size: 14px;
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --border-radius: 5px;
+        --border-width: 1px;
+        --border-style: solid;
+        --border-color: var(--border-clr);
+        --outline: none;
+        --box-shadow: none;
+        --highlight-color: transparent;
+        --highlight-color-focused: transparent;
+      }
+
+      .clear-search-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        background-color: var(--clear-search-btn);
+        color: #a8a8a8;
+        transition: background-color 0.2s;
+        z-index: 10;
+      }
+
+      .clear-search-btn:hover {
+        background-color: var(--clear-search-btn-hover);
+        --background: var(--clear-search-btn-hover);
+      }
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0;
+
+      .filter-button {
+        margin-right: 0;
+        --background: var(--button-bg);
+        --border-color: var(--border-clr);
+        --border-radius: 0;
+        --color: var(--text-color);
+        --border-width: 1px;
+        --border-style: solid;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+        box-shadow: none;
+        transition: background-color 0.2s;
+        height: 42px;
+        margin: 0 0px;
+        min-width: 100px;
+
+        &:hover {
+          --background: var(--button-hover);
+        }
+
+        &:first-child {
+          --border-radius: 5px 0 0 5px;
+        }
+
+        &:last-child {
+          --border-radius: 0 5px 5px 0;
+        }
+
+        &:not(:last-child) {
+          border-right: none;
+        }
+
+        &.active {
+          --background: rgba(var(--primary-color), 0.5);
+          --border-color: rgba(var(--primary-color), 0.5);
+          --color: white;
+        }
+
+        &.active:hover,
+        &.active:focus {
+          --background: rgba(var(--primary-color), 0.5);
+          --border-color: rgba(var(--primary-color), 0.5);
+          --color: white;
+        }
+      }
+    }
+
+    .progress-section {
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--ion-color-light-shade);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 4px;
+
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-primary-shade));
+          border-radius: 4px;
+          transition: width 0.3s ease;
+        }
+      }
+
+      .progress-text {
+        text-align: center;
+        font-size: 12px;
+        color: var(--ion-color-medium);
+        font-weight: 500;
+      }
+    }
+  }
+
+  .champion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px;
+    padding-bottom: 20px;
+
+    .champion-card {
+      height: 250px;
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+      background-size: calc(100% + 30px);
+      background-position: top -15px left -15px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      box-sizing: border-box;
+      overflow: hidden;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      &.owned {
+        .overlay {
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+      }
+
+      &.loading {
+        .overlay {
+          background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .loading-spinner {
+          opacity: 1;
+          display: block;
+        }
+
+        .checkmark {
+          opacity: 0;
+        }
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        transition: background-color 0.2s;
+      }
+
+      .loading-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        opacity: 0;
+        z-index: 3;
+        animation: spin 1s ease-in-out infinite;
+        display: none;
+        user-select: none;
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 60px;
+        color: #d4af37;
+        opacity: 1;
+        transition: opacity 0.2s;
+        z-index: 3;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        user-select: none;
+      }
+
+      .champion-name {
+        position: relative;
+        z-index: 2;
+        user-select: none;
+      }
+    }
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

@@ -37,24 +37,19 @@
             <div class="progress-fill" [style.width.%]="progressPercentage"></div>
           </div>
           <div class="progress-text">
-            {{ getProgressText() }} ({{ progressPercentage }}%)
+            {{ progressPercentage }}% completed
           </div>
         </div>
       </div>
 
-      <!-- Recent Champions Section -->
-      <div class="recent-champions-section" *ngIf="lastFiveChampions.length > 0">
-        <h2>Recently Unlocked</h2>
-        <div class="champion-grid">
-          <div
-            class="champion-card"
-            *ngFor="let champion of lastFiveChampions"
-            [style.backgroundImage]="'url(' + getChampionImageUrl(champion) + ')'">
-            <div class="champion-overlay">
-              <div class="champion-name">{{ champion }}</div>
-            </div>
-          </div>
-        </div>
+      <!-- Completed Champions Section -->
+      <div class="champions-section">
+        <app-champion-list
+          [champions]="user?.champs || []"
+          [ownedChampions]="user?.champs || []"
+          [loadingChampions]="loadingChampions"
+          [config]="championListConfig">
+        </app-champion-list>
       </div>
 
       <!-- Empty State -->

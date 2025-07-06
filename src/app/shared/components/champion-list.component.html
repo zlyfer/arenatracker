@@ -1,0 +1,56 @@
+<div class="champion-list-container">
+  <!-- Search and Filters -->
+  <div class="controls" *ngIf="config.showSearch || config.showFilters">
+    <!-- Search Bar -->
+    <div class="search-container" *ngIf="config.showSearch">
+      <ion-input class="search-bar" placeholder="Search champions..." [(ngModel)]="searchTerm"
+        (ionInput)="onSearchChange()">
+      </ion-input>
+      <button class="clear-search-btn" (click)="clearSearch()" *ngIf="searchTerm">
+        ✕
+      </button>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons" *ngIf="config.showFilters">
+      <ion-button class="filter-button" [class.active]="currentFilter === 'all'" fill="clear"
+        (click)="onFilterChange('all')">
+        All
+      </ion-button>
+      <ion-button class="filter-button" [class.active]="currentFilter === 'owned'" fill="clear"
+        (click)="onFilterChange('owned')">
+        Checked
+      </ion-button>
+      <ion-button class="filter-button" [class.active]="currentFilter === 'unowned'" fill="clear"
+        (click)="onFilterChange('unowned')">
+        Unchecked
+      </ion-button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-section" *ngIf="config.showProgress">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="getProgressPercentage()"></div>
+      </div>
+      <div class="progress-text">{{ getProgressText() }}</div>
+    </div>
+  </div>
+
+  <!-- Champion Grid -->
+  <div class="champion-grid">
+    <div class="champion-card" [class.owned]="isChampionOwned(champion)" [class.loading]="isChampionLoading(champion)"
+      *ngFor="let champion of filteredChampions" (click)="onChampionClick(champion)"
+      [style.backgroundImage]="'url(' + getChampionImageUrl(champion) + ')'">
+
+      <div class="overlay"></div>
+      <div class="loading-spinner"></div>
+      <div class="checkmark" *ngIf="config.showCheckmarks && isChampionOwned(champion)">✓</div>
+      <div class="champion-name">{{ champion }}</div>
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div class="no-results" *ngIf="filteredChampions.length === 0">
+    <p>No champions found matching your search criteria.</p>
+  </div>
+</div>

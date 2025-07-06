@@ -118,27 +118,13 @@
     </a>
   </div>
 
-  <div class="champ-grid">
-        <div
-      class="champ-card"
-      [class.owned]="isChampionOwned(champion)"
-      [class.loading]="isChampionLoading(champion)"
-      *ngFor="let champion of filteredChampions"
-      (click)="toggleChampion(champion)"
-      [style.backgroundImage]="'url(' + getChampionImageUrl(champion) + ')'">
-
-      <div class="overlay"></div>
-      <div class="loading-spinner"></div>
-      <div class="checkmark" *ngIf="isChampionOwned(champion)">✓</div>
-      <div class="champ-name">{{ champion }}</div>
-    </div>
-  </div>
-
-
-
-  <div class="no-results" *ngIf="filteredChampions.length === 0">
-    <p>No champions found matching your search criteria.</p>
-  </div>
+  <app-champion-list
+    [champions]="filteredChampions"
+    [ownedChampions]="currentUser?.champs || []"
+    [loadingChampions]="loadingChampions"
+    [config]="championListConfig"
+    (championClick)="toggleChampion($event)">
+  </app-champion-list>
 </ion-content>
 
 <div class="footer">

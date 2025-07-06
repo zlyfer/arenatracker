@@ -17,6 +17,16 @@ export class ProfilePage implements OnInit, OnDestroy {
   errorMessage = '';
   progressPercentage = 0;
   lastFiveChampions: string[] = [];
+  loadingChampions: Set<string> = new Set();
+  championListConfig = {
+    showSearch: false,
+    showFilters: false,
+    showProgress: false,
+    clickable: false,
+    showCheckmarks: true,
+    showLoadingStates: false,
+    gridColumns: 4,
+  };
 
   private refreshInterval: Subscription | null = null;
   private subscriptions: Subscription[] = [];
@@ -135,11 +145,6 @@ export class ProfilePage implements OnInit, OnDestroy {
   getChampionImageUrl(champion: string): string {
     const processedName = this.championService.processChampionName(champion);
     return `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${processedName}_0.jpg`;
-  }
-
-  getProgressText(): string {
-    if (!this.user || this.champions.length === 0) return '0/0';
-    return `${this.user.champs.length}/${this.champions.length}`;
   }
 
   getTotalChampions(): number {

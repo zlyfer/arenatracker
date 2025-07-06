@@ -20,6 +20,15 @@ export class ChampionsPage implements OnInit, OnDestroy {
   currentTheme = 'auto';
   isPublicStateSwitching = false;
   loadingChampions = new Set<string>();
+  championListConfig = {
+    showSearch: false,
+    showFilters: false,
+    showProgress: false,
+    clickable: true,
+    showCheckmarks: true,
+    showLoadingStates: true,
+    gridColumns: 6,
+  };
 
   private subscriptions: Subscription[] = [];
 

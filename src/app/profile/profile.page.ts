@@ -154,4 +154,8 @@ export class ProfilePage implements OnInit, OnDestroy {
   getAvailableChampions(): number {
     return this.champions.length;
   }
+
+  getReversedChampions(): string[] {
+    return this.user?.champs ? [...this.user.champs].reverse() : [];
+  }
 }

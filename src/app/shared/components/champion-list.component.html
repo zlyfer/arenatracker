@@ -39,6 +39,7 @@
   <!-- Champion Grid -->
   <div class="champion-grid">
     <div class="champion-card" [class.owned]="isChampionOwned(champion)" [class.loading]="isChampionLoading(champion)"
+      [class.profile-mode]="!config.clickable"
       *ngFor="let champion of filteredChampions" (click)="onChampionClick(champion)"
       [style.backgroundImage]="'url(' + getChampionImageUrl(champion) + ')'">
 

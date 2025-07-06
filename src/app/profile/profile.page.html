@@ -45,7 +45,7 @@
       <!-- Completed Champions Section -->
       <div class="champions-section">
         <app-champion-list
-          [champions]="user?.champs || []"
+          [champions]="getReversedChampions()"
           [ownedChampions]="user?.champs || []"
           [loadingChampions]="loadingChampions"
           [config]="championListConfig">

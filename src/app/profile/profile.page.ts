@@ -133,8 +133,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   private startAutoRefresh() {
-    // Refresh every 60 seconds
-    this.refreshInterval = interval(60000).subscribe(() => {
+    this.refreshInterval = interval(10000).subscribe(() => {
       if (this.username) {
         console.log('Auto-refreshing profile data...');
         this.fetchPublicProfile();

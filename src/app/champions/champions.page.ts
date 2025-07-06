@@ -20,6 +20,7 @@ export class ChampionsPage implements OnInit, OnDestroy {
   currentTheme = 'auto';
   isPublicStateSwitching = false;
   loadingChampions = new Set<string>();
+  isLoadingChampions = true;
   championListConfig = {
     showSearch: false,
     showFilters: false,
@@ -56,16 +57,21 @@ export class ChampionsPage implements OnInit, OnDestroy {
   }
 
   private loadChampions() {
+    this.isLoadingChampions = true;
     this.subscriptions.push(
       this.championService.getChampions().subscribe({
         next: (response) => {
           if (response.success) {
             this.champions = response.champions;
             this.applyFilters();
+          } else {
+            console.error('Failed to load champions');
           }
+          this.isLoadingChampions = false;
         },
         error: (error) => {
           console.error('Error loading champions:', error);
+          this.isLoadingChampions = false;
         },
       })
     );

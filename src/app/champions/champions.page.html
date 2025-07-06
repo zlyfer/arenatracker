@@ -118,7 +118,15 @@
     </a>
   </div>
 
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="isLoadingChampions">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading champions...</p>
+  </div>
+
+  <!-- Champion List -->
   <app-champion-list
+    *ngIf="!isLoadingChampions"
     [champions]="filteredChampions"
     [ownedChampions]="currentUser?.champs || []"
     [loadingChampions]="loadingChampions"

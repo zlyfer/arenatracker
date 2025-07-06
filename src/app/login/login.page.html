@@ -13,33 +13,23 @@
     <div class="login-form">
       <ion-item>
         <ion-label position="stacked">Username</ion-label>
-        <ion-input
-          type="text"
-          [(ngModel)]="username"
-          placeholder="Username"
-          required
-          (keyup)="onKeyPress($event)">
+        <ion-input type="text" [(ngModel)]="username" placeholder="Username" required (keyup)="onKeyPress($event)">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
-        <ion-input
-          type="password"
-          [(ngModel)]="password"
-          placeholder="Password"
-          required
-          (keyup)="onKeyPress($event)">
+        <ion-input type="password" [(ngModel)]="password" placeholder="Password" required (keyup)="onKeyPress($event)">
         </ion-input>
       </ion-item>
 
-      <ion-button
-        expand="block"
-        (click)="onLogin()"
-        [disabled]="isLoading"
-        class="login-button">
+      <ion-button expand="block" (click)="onLogin()" [disabled]="isLoading" class="login-button">
         <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
         <span *ngIf="!isLoading">Login</span>
+      </ion-button>
+
+      <ion-button expand="block" class="login-button" color="warning" href="mailto:arenatracker@zlyfer.net?subject=Arena Tracker">
+        <span>Help / Feedback</span>
       </ion-button>
     </div>
   </div>

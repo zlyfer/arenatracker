@@ -97,15 +97,15 @@
         }
 
         &.active {
-          --background: rgba(var(--primary-color), 0.5);
-          --border-color: rgba(var(--primary-color), 0.5);
+          --background: rgba(var(--ion-color-primary-rgb), 0.5);
+          --border-color: rgba(var(--ion-color-primary-rgb), 0.5);
           --color: white;
         }
 
         &.active:hover,
         &.active:focus {
-          --background: rgba(var(--primary-color), 0.5);
-          --border-color: rgba(var(--primary-color), 0.5);
+          --background: rgba(var(--ion-color-primary-rgb), 0.5);
+          --border-color: rgba(var(--ion-color-primary-rgb), 0.5);
           --color: white;
         }
       }

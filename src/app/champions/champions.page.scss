@@ -89,7 +89,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: rgba(var(--primary-color), 0.5);
+  background: rgba(var(--ion-color-primary-rgb), 0.5);
   transition: width 0.3s ease;
   z-index: 1;
 }
@@ -218,15 +218,15 @@
 }
 
 .filter-button.active {
-  --background: rgba(var(--primary-color), 0.5);
-  --border-color: rgba(var(--primary-color), 0.5);
+  --background: rgba(var(--ion-color-primary-rgb), 0.5);
+  --border-color: rgba(var(--ion-color-primary-rgb), 0.5);
   --color: white;
 }
 
 .filter-button.active:hover,
 .filter-button.active:focus {
-  --background: rgba(var(--primary-color), 0.5);
-  --border-color: rgba(var(--primary-color), 0.5);
+  --background: rgba(var(--ion-color-primary-rgb), 0.3);
+  --border-color: rgba(var(--ion-color-primary-rgb), 0.8);
   --color: white;
 }
 
@@ -235,26 +235,26 @@
 }
 
 .public-toggle-btn.public {
-  --background: rgba(var(--green-color), 0.5);
-  --border-color: rgb(var(--green-color));
+  --background: rgba(var(--ion-color-success-rgb), 0.5);
+  --border-color: rgb(var(--ion-color-success-rgb));
   --color: white;
 }
 
 .public-toggle-btn.public:hover {
-  --background: rgba(var(--green-hover-color), 0.5);
-  --border-color: rgb(var(--green-hover-color));
+  --background: rgba(var(--ion-color-success-rgb), 0.3);
+  --border-color: rgb(var(--ion-color-success-rgb), 0.8);
 }
 
 .public-toggle-btn.private {
-  --background: rgba(var(--red-color), 0.5);
-  --border-color: rgb(var(--red-color));
+  --background: rgba(var(--ion-color-danger-rgb), 0.5);
+  --border-color: rgb(var(--ion-color-danger-rgb));
   --color: white;
   --border-radius: 4px;
 }
 
 .public-toggle-btn.private:hover {
-  --background: rgba(var(--red-hover-color), 0.5);
-  --border-color: rgb(var(--red-hover-color));
+  --background: rgba(var(--ion-color-danger-rgb), 0.3);
+  --border-color: rgb(var(--ion-color-danger-rgb), 0.8);
 }
 
 .public-visit-btn {
@@ -263,14 +263,14 @@
   --border-left: none;
   width: 80px;
   min-width: 80px;
-  --background: rgba(var(--primary-color), 0.5);
-  --border-color: rgba(var(--primary-color), 0.5);
+  --background: rgba(var(--ion-color-primary-rgb), 0.5);
+  --border-color: rgba(var(--ion-color-primary-rgb), 0.5);
   --color: white;
 }
 
 .public-visit-btn:hover {
-  --background: rgba(var(--primary-color), 0.5);
-  --border-color: rgba(var(--primary-color), 0.5);
+  --background: rgba(var(--ion-color-primary-rgb), 0.3);
+  --border-color: rgba(var(--ion-color-primary-rgb), 0.8);
 }
 
 .public-visit-btn#profile-btn {
@@ -281,8 +281,8 @@
 }
 
 // .public-toggle-btn.private + .public-visit-btn {
-//   --background: rgba(var(--red-color), 0.5);
-//   --border-color: rgb(var(--red-color));
+//   --background: rgba(var(--ion-color-danger-rgb), 0.5);
+//   --border-color: rgb(var(--ion-color-danger-rgb));
 // }
 
 .github-btn {
@@ -297,14 +297,14 @@
 }
 
 .logout-btn {
-  --background: rgba(var(--red-color), 0.5);
+  --background: rgba(var(--ion-color-danger-rgb), 0.5);
   --color: white;
-  --border-color: rgb(var(--red-color));
+  --border-color: rgb(var(--ion-color-danger-rgb));
 }
 
 .logout-btn:hover {
-  --background: rgba(var(--red-hover-color), 0.5);
-  --border-color: rgb(var(--red-hover-color));
+  --background: rgba(var(--ion-color-danger-rgb), 0.3);
+  --border-color: rgb(var(--ion-color-danger-rgb), 0.8);
 }
 
 .champ-grid {
@@ -446,10 +446,10 @@
   right: 170px;
 }
 #old-version-link a {
-  background: rgba(var(--green-color), 0.5);
+  background: rgba(var(--ion-color-success-rgb), 0.5);
 }
 #old-version-link:hover a {
-  background: rgba(var(--green-color), 1);
+  background: rgba(var(--ion-color-success-rgb), 0.8);
 }
 
 #support {
@@ -457,10 +457,10 @@
   right: 10px;
 }
 #support a {
-  background: rgba(var(--primary-color), 0.5);
+  background: rgba(var(--ion-color-warning-rgb), 0.5);
 }
 #support:hover a {
-  background: rgba(var(--primary-color), 1);
+  background: rgba(var(--ion-color-warning-rgb), 0.8);
 }
 
 .footer {
@@ -485,7 +485,7 @@
 }
 
 .footer-link {
-  color: rgba(var(--primary-color), 1);
+  color: rgba(var(--ion-color-primary-rgb), 1);
   text-decoration: none;
   font-weight: 500;
 }

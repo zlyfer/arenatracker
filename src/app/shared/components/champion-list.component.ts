@@ -50,6 +50,10 @@ export class ChampionListComponent implements OnInit, OnDestroy {
     this.applyFilters();
   }
 
+  ngOnChanges() {
+    this.applyFilters();
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }

@@ -37,15 +37,17 @@ export class ProfilePage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.username = params['username'];
-      if (this.username) {
-        this.initializePublicProfile();
-        this.startAutoRefresh();
-      } else {
-        this.showError('No username provided');
-      }
-    });
+    this.subscriptions.push(
+      this.route.queryParams.subscribe(params => {
+        this.username = params['username'];
+        if (this.username) {
+          this.initializePublicProfile();
+          this.startAutoRefresh();
+        } else {
+          this.showError('No username provided');
+        }
+      })
+    );
   }
 
   ngOnDestroy() {
@@ -61,12 +63,13 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.fetchPublicProfile();
   }
 
-  private fetchPublicProfile() {
+    private fetchPublicProfile() {
     this.subscriptions.push(
       this.championService.getPublicUser(this.username).subscribe({
         next: (response: PublicUserResponse) => {
           if (response.success && response.user) {
-            this.user = response.user;
+            // Force change detection by creating a new object reference
+            this.user = { ...response.user };
             this.loadChampionsAndRender();
           } else {
             this.showError(response.message || 'Failed to load profile');
@@ -133,9 +136,9 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   private startAutoRefresh() {
-    this.refreshInterval = interval(10000).subscribe(() => {
+    // Refresh every 60 seconds
+    this.refreshInterval = interval(60000).subscribe(() => {
       if (this.username) {
-        console.log('Auto-refreshing profile data...');
         this.fetchPublicProfile();
       }
     });
@@ -155,6 +158,9 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   getReversedChampions(): string[] {
-    return this.user?.champs ? [...this.user.champs].reverse() : [];
+    if (!this.user?.champs) return [];
+    // Force change detection by creating a new array
+    const reversed = [...this.user.champs].reverse();
+    return reversed;
   }
 }

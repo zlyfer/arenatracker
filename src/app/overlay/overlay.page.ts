@@ -126,7 +126,6 @@ export class OverlayPage implements OnInit, OnDestroy {
     // Refresh every 60 seconds
     this.refreshInterval = interval(60000).subscribe(() => {
       if (this.username) {
-        console.log('Auto-refreshing profile data...');
         this.fetchPublicProfile();
       }
     });

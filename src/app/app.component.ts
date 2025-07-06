@@ -18,8 +18,6 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Theme service is already initialized in its constructor
-      console.log('Arena Tracker initialized');
     });
   }
 }

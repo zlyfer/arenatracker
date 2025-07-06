@@ -1,15 +1,15 @@
 {
   "name": "arenatracker",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Frederik 'zlyfer' Shull",
+  "homepage": "https://arenatracker.zlyfer.net/",
   "scripts": {
     "start": "npm run preBuild && ionic serve --no-open --configuration=development",
     "run-android": "ionic serve --no-open --configuration=app",
     "run-android_": "ionic cap run android -l --external --configuration=app",
     "run-ios": "ionic cap run ios -l --external --configuration=app",
     "run-freddy": "ionic cap run android -l --external --public-host=freddypc --target=2748e267 --configuration=app",
-    "build-website": "npm run preBuild && npx ionic build --configuration=production && npx cap copy",
+    "build-website": "npm run preBuild && npx ionic build --configuration=production",
     "build-android": "npm run preBuild && npx ionic build --configuration=app.production && npx cap copy",
     "build-android_": "ionic build --configuration=app.production && ionic cap build android",
     "build-ios": "ionic build --configuration=app.production && ionic cap build ios",
@@ -65,5 +65,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.8.0"
   },
-  "description": "An Ionic project"
+  "description": "League of Legends Arena God Challenge Tracker"
 }

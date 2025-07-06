@@ -40,14 +40,34 @@ export class ChampionsPage implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     // Check if user is logged in
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
 
-    this.currentUser = this.authService.getCurrentUser();
+    // Get fresh user data with retry logic
+    let retries = 0;
+    const maxRetries = 3;
+
+    while (retries < maxRetries) {
+      this.currentUser = await this.authService.getCurrentUserFresh();
+      if (this.currentUser) {
+        break;
+      }
+      retries++;
+      if (retries < maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+    }
+
+    if (!this.currentUser) {
+      console.error('Failed to load user data after retries');
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.loadChampions();
     this.loadTheme();
   }
@@ -135,42 +155,32 @@ export class ChampionsPage implements OnInit, OnDestroy {
       this.currentUser.champs.push(champion);
     }
 
-    // Update localStorage and auth service immediately
-    localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
+    // Update auth service immediately
     this.authService['currentUserSubject'].next(this.currentUser);
 
     // Make API call in background
     this.subscriptions.push(
       this.championService.toggleChampion(champion).subscribe({
-        next: (response) => {
+        next: async (response) => {
           if (response.success) {
-            // API call successful, update with server response
-            this.currentUser!.champs = response.champions;
-            localStorage.setItem(
-              'arenaTrackerUser',
-              JSON.stringify(this.currentUser)
-            );
-            this.authService['currentUserSubject'].next(this.currentUser);
+            // API call successful, fetch fresh user data
+            const freshUser = await this.authService.getCurrentUserFresh();
+            if (freshUser) {
+              this.currentUser = freshUser;
+              this.authService['currentUserSubject'].next(this.currentUser);
+            }
           } else {
             // Revert on error
             this.currentUser!.champs = originalChamps;
-            localStorage.setItem(
-              'arenaTrackerUser',
-              JSON.stringify(this.currentUser)
-            );
             this.authService['currentUserSubject'].next(this.currentUser);
             console.error('Error toggling champion:', response.message);
           }
           // Remove from loading set
           this.loadingChampions.delete(champion);
         },
-        error: (error) => {
+        error: async (error) => {
           // Revert on error
           this.currentUser!.champs = originalChamps;
-          localStorage.setItem(
-            'arenaTrackerUser',
-            JSON.stringify(this.currentUser)
-          );
           this.authService['currentUserSubject'].next(this.currentUser);
           console.error('Error toggling champion:', error);
           // Remove from loading set
@@ -206,21 +216,38 @@ export class ChampionsPage implements OnInit, OnDestroy {
     if (!this.currentUser || this.isPublicStateSwitching) return;
 
     this.isPublicStateSwitching = true;
+    const newPublicState = !this.currentUser.public;
+
+    // Optimistically update the UI immediately
+    this.currentUser.public = newPublicState;
+    this.authService['currentUserSubject'].next(this.currentUser);
 
     this.subscriptions.push(
-      this.championService.setPublicState(!this.currentUser.public).subscribe({
-        next: (response) => {
+      this.championService.setPublicState(newPublicState).subscribe({
+        next: async (response) => {
           if (response.success) {
-            this.currentUser!.public = response.public;
-            localStorage.setItem(
-              'arenaTrackerUser',
-              JSON.stringify(this.currentUser)
-            );
-            this.authService['currentUserSubject'].next(this.currentUser);
+            // API call successful, fetch fresh user data to ensure consistency
+            const freshUser = await this.authService.getCurrentUserFresh();
+            if (freshUser) {
+              this.currentUser = freshUser;
+              this.authService['currentUserSubject'].next(this.currentUser);
+            }
+          } else {
+            // Revert on error
+            if (this.currentUser) {
+              this.currentUser.public = !newPublicState;
+              this.authService['currentUserSubject'].next(this.currentUser);
+            }
+            console.error('Error setting public state:', response.message);
           }
           this.isPublicStateSwitching = false;
         },
         error: (error) => {
+          // Revert on error
+          if (this.currentUser) {
+            this.currentUser.public = !newPublicState;
+            this.authService['currentUserSubject'].next(this.currentUser);
+          }
           console.error('Error setting public state:', error);
           this.isPublicStateSwitching = false;
         },

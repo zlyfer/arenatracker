@@ -39,7 +39,13 @@ export class LoginPage implements OnInit {
       const response = await this.authService.login(this.username, this.password);
 
       if (response.success) {
-        this.router.navigate(['/home']);
+        // Ensure user data is available before navigation
+        const user = await this.authService.getCurrentUserFresh();
+        if (user) {
+          this.router.navigate(['/home']);
+        } else {
+          this.errorMessage = 'Login successful but failed to load user data';
+        }
       } else {
         this.errorMessage = response.message || 'Login failed';
       }

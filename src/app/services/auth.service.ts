@@ -34,17 +34,14 @@ export class AuthService {
   }
 
   private loadUserFromStorage(): void {
-    const savedUser = localStorage.getItem('arenaTrackerUser');
     const token = localStorage.getItem(this.tokenKey);
 
-    if (savedUser && token) {
-      try {
-        const user = JSON.parse(savedUser);
-        this.currentUserSubject.next(user);
-      } catch (e) {
-        console.error('Error parsing saved user', e);
-        this.clearAuth();
-      }
+    if (token && !this.isTokenExpired()) {
+      // Token exists and is valid, but we don't load user data from localStorage
+      // User data will be fetched fresh when needed
+      // Don't set currentUserSubject to null here - let it be fetched when needed
+    } else {
+      this.clearAuth();
     }
   }
 
@@ -63,7 +60,6 @@ export class AuthService {
       }).pipe(
         map(response => {
           if (response.success && response.user && response.token) {
-            localStorage.setItem('arenaTrackerUser', JSON.stringify(response.user));
             localStorage.setItem(this.tokenKey, response.token);
             this.currentUserSubject.next(response.user);
           }
@@ -82,7 +78,6 @@ export class AuthService {
   }
 
   private clearAuth(): void {
-    localStorage.removeItem('arenaTrackerUser');
     localStorage.removeItem(this.tokenKey);
     this.currentUserSubject.next(null);
   }
@@ -92,7 +87,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.currentUserSubject.value !== null && this.getToken() !== null;
+    const token = this.getToken();
+    return token !== null && !this.isTokenExpired();
   }
 
   getToken(): string | null {
@@ -118,5 +114,43 @@ export class AuthService {
     } catch (e) {
       return true;
     }
+  }
+
+  // Fetch fresh user data from server
+  async fetchCurrentUser(): Promise<User | null> {
+    if (!this.isLoggedIn()) {
+      return null;
+    }
+
+    try {
+      const response = await this.http.get<LoginResponse>(`${this.API_BASE_URL}/current-user`, {
+        headers: this.getAuthHeaders()
+      }).toPromise();
+
+      if (response && response.success && response.user) {
+        this.currentUserSubject.next(response.user);
+        return response.user;
+      } else {
+        console.error('Failed to fetch current user:', response);
+        this.clearAuth();
+        return null;
+      }
+    } catch (error: any) {
+      console.error('Error fetching current user:', error);
+      // Don't clear auth on network errors, only on auth errors
+      if (error.status === 401 || error.status === 403) {
+        this.clearAuth();
+      }
+      return null;
+    }
+  }
+
+  // Get current user, fetching fresh data if needed
+  async getCurrentUserFresh(): Promise<User | null> {
+    const currentUser = this.currentUserSubject.value;
+    if (currentUser) {
+      return currentUser;
+    }
+    return await this.fetchCurrentUser();
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 export interface ChampionResponse {
   success: boolean;
@@ -37,7 +38,7 @@ export interface PublicUserResponse {
   providedIn: 'root'
 })
 export class ChampionService {
-  private readonly API_BASE_URL = 'http://localhost:8080/arenatracker';
+  private readonly API_BASE_URL = environment.apiBaseUrl;
 
   constructor(
     private http: HttpClient,

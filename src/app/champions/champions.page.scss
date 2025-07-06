@@ -208,54 +208,60 @@
   --color: white;
 }
 
-.overlay-toggle-btn {
+.public-toggle-btn {
   --border-radius: 4px 0 0 4px;
 }
 
-.overlay-toggle-btn.public {
+.public-toggle-btn.public {
   --background: rgba(var(--green-color), 0.5);
   --border-color: rgb(var(--green-color));
   --color: white;
 }
 
-.overlay-toggle-btn.public:hover {
+.public-toggle-btn.public:hover {
   --background: rgba(var(--green-hover-color), 0.5);
   --border-color: rgb(var(--green-hover-color));
 }
 
-.overlay-toggle-btn.private {
+.public-toggle-btn.private {
   --background: rgba(var(--red-color), 0.5);
   --border-color: rgb(var(--red-color));
   --color: white;
   --border-radius: 4px;
 }
 
-.overlay-toggle-btn.private:hover {
+.public-toggle-btn.private:hover {
   --background: rgba(var(--red-hover-color), 0.5);
   --border-color: rgb(var(--red-hover-color));
 }
 
-.overlay-visit-btn {
-  font-size: 16px;
+.public-visit-btn {
+  font-size: 12px;
   margin-left: -10px;
-  --border-radius: 0 4px 4px 0;
   --border-left: none;
-  width: 50px;
-  min-width: 50px;
+  width: 80px;
+  min-width: 80px;
   --background: rgba(var(--primary-color), 0.5);
   --border-color: rgba(var(--primary-color), 0.5);
   --color: white;
 }
 
-.overlay-visit-btn:hover {
+.public-visit-btn:hover {
   --background: rgba(var(--primary-color), 0.5);
   --border-color: rgba(var(--primary-color), 0.5);
 }
 
-.overlay-toggle-btn.private + .overlay-visit-btn {
-  --background: rgba(var(--red-color), 0.5);
-  --border-color: rgb(var(--red-color));
+.public-visit-btn#profile-btn {
+  --border-radius: 0;
 }
+.public-visit-btn#overlay-btn {
+  --border-radius: 0 4px 4px 0;
+}
+
+// .public-toggle-btn.private + .public-visit-btn {
+//   --background: rgba(var(--red-color), 0.5);
+//   --border-color: rgb(var(--red-color));
+// }
 
 .github-btn {
   width: 42px;

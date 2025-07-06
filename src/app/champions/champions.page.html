@@ -9,7 +9,7 @@
     </div>
 
     <ion-button
-      class="overlay-toggle-btn topbar-btn"
+      class="public-toggle-btn topbar-btn"
       [class.public]="currentUser?.public"
       [class.private]="!currentUser?.public"
       fill="clear"
@@ -19,12 +19,23 @@
     </ion-button>
 
     <ion-button
-      class="overlay-visit-btn topbar-btn"
+      id="profile-btn"
+      class="public-visit-btn topbar-btn"
       *ngIf="currentUser?.public"
       fill="clear"
-      (click)="openPublicProfile()"
+      (click)="openPublic('profile')"
       title="Open Public Profile">
-      👉
+      Profile
+    </ion-button>
+
+    <ion-button
+      id="overlay-btn"
+      class="public-visit-btn topbar-btn"
+      *ngIf="currentUser?.public"
+      fill="clear"
+      (click)="openPublic('overlay')"
+      title="Open Stream Overlay">
+      Overlay
     </ion-button>
 
     <div class="search-container">

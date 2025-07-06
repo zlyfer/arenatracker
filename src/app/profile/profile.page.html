@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true">
+  <div class="profile-container">
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="isLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Loading profile...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-container" *ngIf="errorMessage">
+      <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+      <h2>Error</h2>
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-content" *ngIf="!isLoading && !errorMessage && user">
+      <!-- User Info Section -->
+      <div class="user-info-section">
+        <div class="user-header">
+          <h1>{{ username }}</h1>
+          <div class="user-stats">
+            <div class="stat-item">
+              <span class="stat-label">Champions #1</span>
+              <span class="stat-value">{{ getTotalChampions() }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Total</span>
+              <span class="stat-value">{{ getAvailableChampions() }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+          </div>
+          <div class="progress-text">
+            {{ getProgressText() }} ({{ progressPercentage }}%)
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Champions Section -->
+      <div class="recent-champions-section" *ngIf="lastFiveChampions.length > 0">
+        <h2>Recently Unlocked</h2>
+        <div class="champion-grid">
+          <div
+            class="champion-card"
+            *ngFor="let champion of lastFiveChampions"
+            [style.backgroundImage]="'url(' + getChampionImageUrl(champion) + ')'">
+            <div class="champion-overlay">
+              <div class="champion-name">{{ champion }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!isLoading && !errorMessage && lastFiveChampions.length === 0">
+        <ion-icon name="trophy-outline" class="empty-icon"></ion-icon>
+        <h2>No Champions Yet</h2>
+        <p>This user hasn't unlocked any champions yet.</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

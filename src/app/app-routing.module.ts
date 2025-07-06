@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'overlay',
     loadChildren: () => import('./overlay/overlay.module').then(m => m.OverlayPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
   }
 ];
 

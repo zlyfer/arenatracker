@@ -9,7 +9,7 @@ import { ThemeService } from '../services/theme.service';
   selector: 'app-champions',
   templateUrl: './champions.page.html',
   styleUrls: ['./champions.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class ChampionsPage implements OnInit, OnDestroy {
   currentUser: User | null = null;
@@ -28,7 +28,7 @@ export class ChampionsPage implements OnInit, OnDestroy {
     private championService: ChampionService,
     private themeService: ThemeService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     // Check if user is logged in
@@ -43,7 +43,7 @@ export class ChampionsPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   private loadChampions() {
@@ -57,14 +57,14 @@ export class ChampionsPage implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error('Error loading champions:', error);
-        }
+        },
       })
     );
   }
 
   private loadTheme() {
     this.subscriptions.push(
-      this.themeService.theme$.subscribe(theme => {
+      this.themeService.theme$.subscribe((theme) => {
         this.currentTheme = theme;
       })
     );
@@ -87,8 +87,10 @@ export class ChampionsPage implements OnInit, OnDestroy {
   private applyFilters() {
     if (!this.currentUser) return;
 
-    this.filteredChampions = this.champions.filter(champion => {
-      const matchesSearch = champion.toLowerCase().includes(this.searchTerm.toLowerCase());
+    this.filteredChampions = this.champions.filter((champion) => {
+      const matchesSearch = champion
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
       const isOwned = this.currentUser!.champs.includes(champion);
 
       const showBasedOnFilter =
@@ -100,7 +102,7 @@ export class ChampionsPage implements OnInit, OnDestroy {
     });
   }
 
-    toggleChampion(champion: string) {
+  toggleChampion(champion: string) {
     if (!this.currentUser || this.loadingChampions.has(champion)) return;
 
     // Add to loading set
@@ -111,7 +113,9 @@ export class ChampionsPage implements OnInit, OnDestroy {
     const originalChamps = [...this.currentUser.champs];
 
     if (isCurrentlyOwned) {
-      this.currentUser.champs = this.currentUser.champs.filter(c => c !== champion);
+      this.currentUser.champs = this.currentUser.champs.filter(
+        (c) => c !== champion
+      );
     } else {
       this.currentUser.champs.push(champion);
     }
@@ -127,12 +131,18 @@ export class ChampionsPage implements OnInit, OnDestroy {
           if (response.success) {
             // API call successful, update with server response
             this.currentUser!.champs = response.champions;
-            localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
+            localStorage.setItem(
+              'arenaTrackerUser',
+              JSON.stringify(this.currentUser)
+            );
             this.authService['currentUserSubject'].next(this.currentUser);
           } else {
             // Revert on error
             this.currentUser!.champs = originalChamps;
-            localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
+            localStorage.setItem(
+              'arenaTrackerUser',
+              JSON.stringify(this.currentUser)
+            );
             this.authService['currentUserSubject'].next(this.currentUser);
             console.error('Error toggling champion:', response.message);
           }
@@ -142,12 +152,15 @@ export class ChampionsPage implements OnInit, OnDestroy {
         error: (error) => {
           // Revert on error
           this.currentUser!.champs = originalChamps;
-          localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
+          localStorage.setItem(
+            'arenaTrackerUser',
+            JSON.stringify(this.currentUser)
+          );
           this.authService['currentUserSubject'].next(this.currentUser);
           console.error('Error toggling champion:', error);
           // Remove from loading set
           this.loadingChampions.delete(champion);
-        }
+        },
       })
     );
   }
@@ -184,7 +197,10 @@ export class ChampionsPage implements OnInit, OnDestroy {
         next: (response) => {
           if (response.success) {
             this.currentUser!.public = response.public;
-            localStorage.setItem('arenaTrackerUser', JSON.stringify(this.currentUser));
+            localStorage.setItem(
+              'arenaTrackerUser',
+              JSON.stringify(this.currentUser)
+            );
             this.authService['currentUserSubject'].next(this.currentUser);
           }
           this.isPublicStateSwitching = false;
@@ -192,14 +208,16 @@ export class ChampionsPage implements OnInit, OnDestroy {
         error: (error) => {
           console.error('Error setting public state:', error);
           this.isPublicStateSwitching = false;
-        }
+        },
       })
     );
   }
 
-  openPublicProfile() {
+  openPublic(type: 'profile' | 'overlay') {
     if (this.currentUser?.username) {
-      const publicProfileUrl = `${window.location.origin}/overlay?username=${encodeURIComponent(this.currentUser.username)}`;
+      const publicProfileUrl = `${
+        window.location.origin
+      }/${type}?username=${encodeURIComponent(this.currentUser.username)}`;
       window.open(publicProfileUrl, '_blank');
     }
   }

@@ -379,15 +379,11 @@
   opacity: 0;
 }
 
-
-
 .champ-card .champ-name {
   position: relative;
   z-index: 2;
   user-select: none;
 }
-
-
 
 .no-results {
   text-align: center;
@@ -396,10 +392,8 @@
   opacity: 0.7;
 }
 
-#feedback-link {
+.click-button {
   position: absolute;
-  top: 16px;
-  right: 20px;
   z-index: 1000;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
@@ -407,9 +401,8 @@
   text-align: center;
 }
 
-#feedback-link a {
+.click-button a {
   display: block;
-  background: rgba(var(--primary-color), 0.5);
   color: white;
   padding: 10px 15px;
   border-radius: 25px;
@@ -420,6 +413,24 @@
   transition: background-color 0.2s;
 }
 
+#old-version-link {
+  top: 16px;
+  right: 180px;
+}
+#old-version-link a {
+  background: rgba(var(--green-color), 0.5);
+}
+#old-version-link:hover a {
+  background: rgba(var(--green-color), 1);
+}
+
+#feedback-link {
+  top: 16px;
+  right: 20px;
+}
+#feedback-link a {
+  background: rgba(var(--primary-color), 0.5);
+}
 #feedback-link:hover a {
   background: rgba(var(--primary-color), 1);
 }

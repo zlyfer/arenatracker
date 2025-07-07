@@ -19,9 +19,6 @@ export class ProfilePage implements OnInit, OnDestroy {
   lastFiveChampions: string[] = [];
   loadingChampions: Set<string> = new Set();
   championListConfig = {
-    showSearch: false,
-    showFilters: false,
-    showProgress: false,
     clickable: false,
     showCheckmarks: true,
     showLoadingStates: false,

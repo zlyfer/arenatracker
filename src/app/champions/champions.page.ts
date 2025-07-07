@@ -22,9 +22,6 @@ export class ChampionsPage implements OnInit, OnDestroy {
   loadingChampions = new Set<string>();
   isLoadingChampions = true;
   championListConfig = {
-    showSearch: false,
-    showFilters: false,
-    showProgress: false,
     clickable: true,
     showCheckmarks: true,
     showLoadingStates: true,

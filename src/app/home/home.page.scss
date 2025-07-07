@@ -2,6 +2,7 @@
   --background: var(--ion-color-step-100);
   font-family: "Roboto", sans-serif;
   --padding-top: 50px;
+  --offset-top: 75px !important;
 }
 
 .loading-container {
@@ -26,7 +27,7 @@
 }
 
 .topbar {
-  background-color: var(--ion-color-step-100);
+  background-color: rgba(var(--ion-color-step-100-rgb), 0.85);
   border-bottom: 1px solid var(--ion-color-step-200);
   padding: 15px 50px;
   position: sticky;
@@ -37,6 +38,7 @@
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
+  backdrop-filter: blur(20px);
 }
 
 .left-controls {

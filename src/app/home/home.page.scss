@@ -428,6 +428,8 @@
   backdrop-filter: blur(3px);
   width: 150px;
   text-align: center;
+  overflow: clip;
+  border-radius: 15px;
 }
 
 .click-button a {

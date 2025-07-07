@@ -33,7 +33,8 @@
             ],
             "styles": [
               "src/global.scss",
-              "src/theme/variables.scss"
+              "src/theme/variables-light.scss",
+              "src/theme/variables-dark.scss"
             ],
             "scripts": []
           },
@@ -116,7 +117,8 @@
             ],
             "styles": [
               "src/global.scss",
-              "src/theme/variables.scss"
+              "src/theme/variables-light.scss",
+              "src/theme/variables-dark.scss"
             ],
             "scripts": []
           },

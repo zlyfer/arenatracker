@@ -354,7 +354,7 @@
 }
 
 .champ-card.owned .overlay {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 .champ-card.loading .overlay {
@@ -443,7 +443,7 @@
 
 #old-version-link {
   top: 90px;
-  right: 170px;
+  right: 190px;
 }
 #old-version-link a {
   background: rgba(var(--ion-color-success-rgb), 0.5);
@@ -454,7 +454,7 @@
 
 #support {
   top: 90px;
-  right: 10px;
+  right: 30px;
 }
 #support a {
   background: rgba(var(--ion-color-warning-rgb), 0.5);

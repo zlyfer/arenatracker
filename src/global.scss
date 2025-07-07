@@ -33,35 +33,12 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+@import "@ionic/angular/css/palettes/dark.class.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
-/* Global CSS Variables for Theme Support */
-:root {
-  --bg-color: #f0f0f0;
-  --bg-clr: #f0f0f0;
-  --bg-color2: #f0f0f0dd;
-  --bg-color3: #eeea;
-  --card-bg: #ffffff;
-  --text-color: #333;
-  --border-clr: #ddd;
-  --button-bg: #f4f4f499;
-  --button-hover: #e0e0e099;
-  --clear-search-btn: rgba(0, 0, 0, 0.08);
-  --clear-search-btn-hover: rgba(0, 0, 0, 0.13);
-}
-
-[data-theme="dark"] {
-  --bg-color: #222;
-  --bg-color2: #222d;
-  --card-bg: #333;
-  --text-color: #eee;
-  --border-clr: #444;
-  --button-bg: #4449;
-  --button-hover: #5559;
-  --clear-search-btn: rgba(255, 255, 255, 0.1);
-  --clear-search-btn-hover: rgba(255, 255, 255, 0.13);
-}
+/* Import theme variables */
+@import "./theme/variables-light.scss";
+@import "./theme/variables-dark.scss";
 
 /* Global Styles */
 body {

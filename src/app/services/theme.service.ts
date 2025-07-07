@@ -44,16 +44,24 @@ export class ThemeService {
     if (theme === 'auto') {
       // Use system preference
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      this.setDarkMode(prefersDark);
 
       // Listen for system theme changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (localStorage.getItem('theme') === 'auto') {
-          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+          this.setDarkMode(e.matches);
         }
       });
     } else {
-      document.documentElement.setAttribute('data-theme', theme);
+      this.setDarkMode(theme === 'dark');
+    }
+  }
+
+  private setDarkMode(isDark: boolean): void {
+    if (isDark) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
     }
   }
 }

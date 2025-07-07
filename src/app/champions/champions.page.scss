@@ -1,5 +1,5 @@
 .champion-content {
-  --background: var(--bg-color);
+  --background: var(--ion-color-step-100);
   font-family: "Roboto", sans-serif;
   --padding-top: 50px;
 }
@@ -19,15 +19,15 @@
   }
 
   p {
-    color: var(--text-color);
+    color: var(--ion-text-color);
     font-size: 16px;
     margin: 0;
   }
 }
 
 .topbar {
-  background-color: var(--bg-color2);
-  border-bottom: 1px solid var(--border-clr);
+  background-color: var(--ion-color-step-100);
+  border-bottom: 1px solid var(--ion-color-step-200);
   padding: 15px 50px;
   position: sticky;
   top: 0;
@@ -71,8 +71,8 @@
 
 .username-btn {
   position: relative;
-  background: var(--button-bg);
-  border: 1px solid var(--border-clr);
+  background: var(--ion-color-step-50);
+  border: 1px solid var(--ion-color-step-200);
   border-radius: 25px;
   padding: 8px 16px;
   transition: background-color 0.2s;
@@ -106,13 +106,13 @@
 .username-text {
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-color);
+  color: var(--ion-text-color);
 }
 
 .count-info {
   font-size: 12px;
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--ion-text-color);
   opacity: 0.8;
 }
 
@@ -124,9 +124,9 @@
 }
 
 .search-bar {
-  --background: var(--card-bg);
-  --color: var(--text-color);
-  --placeholder-color: var(--text-color);
+  --background: var(--ion-background-color);
+  --color: var(--ion-text-color);
+  --placeholder-color: var(--ion-text-color);
   padding: 8px 16px;
   min-width: 200px;
   font-size: 14px;
@@ -135,7 +135,7 @@
   --border-radius: 5px;
   --border-width: 1px;
   --border-style: solid;
-  --border-color: var(--border-clr);
+  --border-color: var(--ion-color-step-200);
   --outline: none;
   --box-shadow: none;
   --highlight-color: transparent;
@@ -156,15 +156,15 @@
   width: 20px;
   height: 20px;
   border-radius: 5px;
-  background-color: var(--clear-search-btn);
+  background-color: rgba(var(--ion-color-step-50-rgb), 0.08);
   color: #a8a8a8;
   transition: background-color 0.2s;
   z-index: 10;
 }
 
 .clear-search-btn:hover {
-  background-color: var(--clear-search-btn-hover);
-  --background: var(--clear-search-btn-hover);
+  background-color: rgba(var(--ion-color-step-50-rgb), 0.13);
+  --background: rgba(var(--ion-color-step-50-rgb), 0.13);
 }
 
 .filter-buttons {
@@ -173,12 +173,12 @@
 }
 
 .topbar-btn {
-  --background: var(--button-bg);
-  --color: var(--text-color);
+  --background: var(--ion-color-step-50);
+  --color: var(--ion-text-color);
   --border-radius: 5px;
   --border-width: 1px;
   --border-style: solid;
-  --border-color: var(--border-clr);
+  --border-color: var(--ion-color-step-200);
   border-radius: 15px;
   font-size: 12px;
   font-weight: bold;
@@ -190,19 +190,19 @@
 }
 
 .topbar-btn:hover {
-  --background: var(--button-hover);
+  --background: var(--ion-color-step-150);
 }
 
 .filter-button {
   margin-right: 0;
-  --background: var(--button-bg);
-  --border-color: var(--border-clr);
+  --background: var(--ion-color-step-50);
+  --border-color: var(--ion-color-step-200);
   --border-radius: 0;
 }
 
 .filter-button:hover {
-  --background: var(--button-hover);
-  --border-color: var(--border-clr);
+  --background: var(--ion-color-step-150);
+  --border-color: var(--ion-color-step-200);
 }
 
 .filter-button:first-child {
@@ -293,7 +293,7 @@
 }
 
 .github-btn:visited {
-  --color: var(--text-color);
+  --color: var(--ion-text-color);
 }
 
 .logout-btn {
@@ -317,7 +317,7 @@
 
 .champ-card {
   height: 250px;
-  background-color: var(--card-bg);
+  background-color: var(--ion-background-color);
   border-radius: 15px;
   padding: 15px;
   text-align: center;
@@ -416,7 +416,7 @@
 .no-results {
   text-align: center;
   padding: 40px;
-  color: var(--text-color);
+  color: var(--ion-text-color);
   opacity: 0.7;
 }
 
@@ -446,10 +446,10 @@
   right: 190px;
 }
 #old-version-link a {
-  background: rgba(var(--ion-color-success-rgb), 0.5);
+  background: rgba(var(--ion-color-success-rgb), 0.75);
 }
 #old-version-link:hover a {
-  background: rgba(var(--ion-color-success-rgb), 0.8);
+  background: rgba(var(--ion-color-success-rgb), 1);
 }
 
 #support {
@@ -457,10 +457,10 @@
   right: 30px;
 }
 #support a {
-  background: rgba(var(--ion-color-warning-rgb), 0.5);
+  background: rgba(var(--ion-color-warning-rgb), 0.75);
 }
 #support:hover a {
-  background: rgba(var(--ion-color-warning-rgb), 0.8);
+  background: rgba(var(--ion-color-warning-rgb), 1);
 }
 
 .footer {
@@ -468,7 +468,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-color2);
+  background: var(--ion-color-step-100);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   backdrop-filter: blur(10px);
@@ -478,7 +478,7 @@
 .footer-content {
   text-align: center;
   padding: 8px 16px;
-  color: var(--text-color);
+  color: var(--ion-text-color);
   font-size: 12px;
   font-weight: 500;
   opacity: 0.8;

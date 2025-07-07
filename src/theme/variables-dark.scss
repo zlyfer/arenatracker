@@ -78,37 +78,44 @@ body.dark {
   --ion-toolbar-background: #1f1f1f;
   --ion-tab-bar-background: #1f1f1f;
 
-  /* Custom app variables for dark theme */
-  --bg-color: #222;
-  --bg-color2: #222d;
-  --bg-color3: #eeea;
-  --card-bg: #333;
-  --text-color: #eee;
-  --border-clr: #444;
-  --button-bg: #4449;
-  --button-hover: #5559;
-  --clear-search-btn: rgba(255, 255, 255, 0.1);
-  --clear-search-btn-hover: rgba(255, 255, 255, 0.13);
-
   --ion-color-step-50: #1c1c1c;
+  --ion-color-step-50-rgb: 28, 28, 28;
   --ion-color-step-100: #2a2a2a;
+  --ion-color-step-100-rgb: 42, 42, 42;
   --ion-color-step-150: #363636;
+  --ion-color-step-150-rgb: 54, 54, 54;
   --ion-color-step-200: #414141;
+  --ion-color-step-200-rgb: 65, 65, 65;
   --ion-color-step-250: #4d4d4d;
+  --ion-color-step-250-rgb: 77, 77, 77;
   --ion-color-step-300: #595959;
+  --ion-color-step-300-rgb: 89, 89, 89;
   --ion-color-step-350: #656565;
+  --ion-color-step-350-rgb: 101, 101, 101;
   --ion-color-step-400: #717171;
+  --ion-color-step-400-rgb: 113, 113, 113;
   --ion-color-step-450: #7d7d7d;
+  --ion-color-step-450-rgb: 125, 125, 125;
   --ion-color-step-500: #898989;
+  --ion-color-step-500-rgb: 137, 137, 137;
   --ion-color-step-550: #949494;
+  --ion-color-step-550-rgb: 148, 148, 148;
   --ion-color-step-600: #a0a0a0;
+  --ion-color-step-600-rgb: 160, 160, 160;
   --ion-color-step-650: #acacac;
+  --ion-color-step-650-rgb: 172, 172, 172;
   --ion-color-step-700: #b8b8b8;
+  --ion-color-step-700-rgb: 184, 184, 184;
   --ion-color-step-750: #c4c4c4;
+  --ion-color-step-750-rgb: 196, 196, 196;
   --ion-color-step-800: #d0d0d0;
+  --ion-color-step-800-rgb: 208, 208, 208;
   --ion-color-step-850: #dbdbdb;
+  --ion-color-step-850-rgb: 219, 219, 219;
   --ion-color-step-900: #e7e7e7;
+  --ion-color-step-900-rgb: 231, 231, 231;
   --ion-color-step-950: #f3f3f3;
+  --ion-color-step-950-rgb: 243, 243, 243;
 
   --ion-color-step-text-50: var(--ion-color-step-50);
   --ion-color-step-text-100: var(--ion-color-step-100);

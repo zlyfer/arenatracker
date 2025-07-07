@@ -195,3 +195,45 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 12px;
+  }
+
+  .profile-content {
+    .user-info-section {
+      padding: 12px;
+
+      .user-header {
+        h1 {
+          font-size: 20px;
+        }
+
+        .user-stats {
+          gap: 12px;
+
+          .stat-item {
+            .stat-label {
+              font-size: 10px;
+            }
+
+            .stat-value {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+
+      .progress-section {
+        .progress-bar {
+          height: 10px;
+        }
+
+        .progress-text {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

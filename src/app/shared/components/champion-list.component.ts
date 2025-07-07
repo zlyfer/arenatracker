@@ -26,6 +26,10 @@ export class ChampionListComponent implements OnInit, OnDestroy {
     gridColumns: 6,
   };
 
+  get isProfileMode(): boolean {
+    return this.config.gridColumns === 4;
+  }
+
   @Output() championClick = new EventEmitter<string>();
 
   private subscriptions: Subscription[] = [];

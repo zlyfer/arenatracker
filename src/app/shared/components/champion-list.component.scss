@@ -9,6 +9,30 @@
     margin: 20px;
     padding-bottom: 20px;
 
+    // Mobile responsive adjustments
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 15px;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+      margin: 10px;
+    }
+
+    // Profile page specific adjustments (when gridColumns is 4)
+    &.profile-mode {
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+
+      @media (max-width: 480px) {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+    }
+
     .champion-card {
       height: 250px;
       background-color: var(--ion-background-color);
@@ -30,6 +54,21 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
       box-sizing: border-box;
       overflow: hidden;
+
+      // Mobile responsive adjustments
+      @media (max-width: 768px) {
+        height: 180px;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 12px;
+      }
+
+      @media (max-width: 480px) {
+        height: 150px;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 10px;
+      }
 
       &:hover {
         transform: translateY(-5px);
@@ -87,6 +126,19 @@
         animation: spin 1s ease-in-out infinite;
         display: none;
         user-select: none;
+
+        // Mobile responsive adjustments
+        @media (max-width: 768px) {
+          width: 40px;
+          height: 40px;
+          border-width: 4px;
+        }
+
+        @media (max-width: 480px) {
+          width: 30px;
+          height: 30px;
+          border-width: 3px;
+        }
       }
 
       .checkmark {
@@ -101,6 +153,15 @@
         z-index: 3;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         user-select: none;
+
+        // Mobile responsive adjustments
+        @media (max-width: 768px) {
+          font-size: 45px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 35px;
+        }
       }
 
       .champion-name {

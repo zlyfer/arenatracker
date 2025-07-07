@@ -1,6 +1,6 @@
 <div class="champion-list-container">
   <!-- Champion Grid -->
-  <div class="champion-grid">
+  <div class="champion-grid" [class.profile-mode]="isProfileMode">
     <div class="champion-card" [class.owned]="isChampionOwned(champion)" [class.loading]="isChampionLoading(champion)"
       [class.profile-mode]="!config.clickable"
       *ngFor="let champion of champions" (click)="onChampionClick(champion)"

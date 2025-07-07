@@ -75,7 +75,6 @@
   border: 1px solid var(--border-clr);
   border-radius: 25px;
   padding: 8px 16px;
-  cursor: pointer;
   transition: background-color 0.2s;
   min-width: 200px;
   text-align: center;
@@ -112,6 +111,7 @@
 
 .count-info {
   font-size: 12px;
+  font-weight: bold;
   color: var(--text-color);
   opacity: 0.8;
 }
@@ -181,7 +181,7 @@
   --border-color: var(--border-clr);
   border-radius: 15px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: bold;
   box-shadow: none;
   transition: background-color 0.2s;
   height: 42px;

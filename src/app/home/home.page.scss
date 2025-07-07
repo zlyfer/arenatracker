@@ -81,6 +81,7 @@
   overflow: clip;
   height: 42px;
   line-height: 150%;
+  user-select: none;
 }
 
 .username-progress-bar {
@@ -138,8 +139,8 @@
   --border-color: var(--ion-color-step-200);
   --outline: none;
   --box-shadow: none;
-  --highlight-color: transparent;
-  --highlight-color-focused: transparent;
+  --highlight-color: rgba(var(--ion-color-primary-rgb), 0.3);
+  --highlight-color-focused: rgba(var(--ion-color-primary-rgb), 0.5);
 }
 
 .clear-search-btn {

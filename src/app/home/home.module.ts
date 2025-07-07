@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { ChampionsPageRoutingModule } from './champions-routing.module';
-import { ChampionsPage } from './champions.page';
+import { HomePageRoutingModule } from './home-routing.module';
+import { HomePage } from './home.page';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -12,9 +12,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ChampionsPageRoutingModule,
+    HomePageRoutingModule,
     SharedModule
   ],
-  declarations: [ChampionsPage]
+  declarations: [HomePage]
 })
-export class ChampionsPageModule {}
+export class HomePageModule {}

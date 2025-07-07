@@ -6,12 +6,12 @@ import { ChampionService } from '../services/champion.service';
 import { ThemeService } from '../services/theme.service';
 
 @Component({
-  selector: 'app-champions',
-  templateUrl: './champions.page.html',
-  styleUrls: ['./champions.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   standalone: false,
 })
-export class ChampionsPage implements OnInit, OnDestroy {
+export class HomePage implements OnInit, OnDestroy {
   currentUser: User | null = null;
   champions: string[] = [];
   filteredChampions: string[] = [];

@@ -445,17 +445,6 @@
   transition: background-color 0.2s;
 }
 
-#old-version-link {
-  top: 90px;
-  right: 190px;
-}
-#old-version-link a {
-  background: rgba(var(--ion-color-success-rgb), 0.75);
-}
-#old-version-link:hover a {
-  background: rgba(var(--ion-color-success-rgb), 1);
-}
-
 #support {
   top: 90px;
   right: 30px;

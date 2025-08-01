@@ -9,13 +9,13 @@ import { SupportService, SupportRequest } from '../../services/support.service';
 })
 export class SupportDialogComponent {
   @Output() close = new EventEmitter<void>();
+  @Output() success = new EventEmitter<string>();
 
   category: 'question' | 'feature_request' | 'bug_report' = 'question';
   description: string = '';
-  captcha: string = '';
+  email: string = '';
   isSubmitting: boolean = false;
   errorMessage: string = '';
-  successMessage: string = '';
 
   constructor(private supportService: SupportService) {}
 
@@ -38,34 +38,38 @@ export class SupportDialogComponent {
       return;
     }
 
-    if (!this.captcha.trim()) {
-      this.errorMessage = 'Please complete the captcha.';
+    if (!this.email.trim()) {
+      this.errorMessage = 'Please provide an email address.';
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.email.trim())) {
+      this.errorMessage = 'Please provide a valid email address.';
       return;
     }
 
     this.isSubmitting = true;
     this.errorMessage = '';
-    this.successMessage = '';
 
     const request: SupportRequest = {
       category: this.category,
       description: this.description.trim(),
-      captcha: this.captcha.trim(),
+      email: this.email.trim()
     };
 
     this.supportService.submitSupportRequest(request).subscribe({
       next: (response) => {
         this.isSubmitting = false;
         if (response.success) {
-          this.successMessage = response.message;
           // Reset form
           this.description = '';
-          this.captcha = '';
+          this.email = '';
           this.category = 'question';
-          // Close dialog after a short delay
-          setTimeout(() => {
-            this.closeDialog();
-          }, 2000);
+          // Emit success and close dialog immediately
+          this.success.emit(response.message);
+          this.closeDialog();
         } else {
           this.errorMessage = response.message;
         }

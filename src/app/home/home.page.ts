@@ -22,6 +22,8 @@ export class HomePage implements OnInit, OnDestroy {
   loadingChampions = new Set<string>();
   isLoadingChampions = true;
   showSupportDialog = false;
+  supportSuccessMessage = '';
+  showSupportSuccess = false;
   championListConfig = {
     clickable: true,
     showCheckmarks: true,
@@ -278,5 +280,16 @@ export class HomePage implements OnInit, OnDestroy {
 
   closeSupportDialog() {
     this.showSupportDialog = false;
+  }
+
+  onSupportSuccess(message: string) {
+    this.supportSuccessMessage = message;
+    this.showSupportSuccess = true;
+    this.showSupportDialog = false;
+
+    // Show help button again after 10 seconds
+    setTimeout(() => {
+      this.showSupportSuccess = false;
+    }, 10000);
   }
 }

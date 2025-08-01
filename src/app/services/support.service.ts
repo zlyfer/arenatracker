@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 export interface SupportRequest {
   category: 'question' | 'feature_request' | 'bug_report';
   description: string;
-  captcha: string;
+  email: string;
 }
 
 export interface SupportResponse {

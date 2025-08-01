@@ -16,22 +16,20 @@
       </div>
 
       <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" class="form-control" placeholder="your@email.com" />
+      </div>
+
+      <div class="form-group">
         <label for="description">Description:</label>
         <textarea id="description" [(ngModel)]="description" class="form-control" rows="5"
           placeholder="Please describe your question, feature request, or bug report in detail..."></textarea>
       </div>
 
-      <div class="form-group">
-        <label for="captcha">Captcha: Please enter "arena" to prove you are human</label>
-        <input type="text" id="captcha" [(ngModel)]="captcha" class="form-control" placeholder="Enter 'arena'" />
-      </div>
+
 
       <div class="status-message error-message" *ngIf="errorMessage">
         {{ errorMessage }}
-      </div>
-
-      <div class="status-message success-message" *ngIf="successMessage">
-        {{ successMessage }}
       </div>
 
       <div class="dialog-actions">

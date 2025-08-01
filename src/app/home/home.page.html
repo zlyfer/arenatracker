@@ -71,10 +71,13 @@
 </div>
 
 <ion-content class="champion-content">
-  <div class="click-button" id="support">
-    <button (click)="openSupportDialog()" class="support-btn">
+  <div class="click-button" id="support" [class.success]="showSupportSuccess">
+    <button (click)="openSupportDialog()" class="support-btn" *ngIf="!showSupportSuccess">
       <span>Help / Feedback</span>
     </button>
+    <div class="support-success" *ngIf="showSupportSuccess">
+      <span>{{ supportSuccessMessage }}</span>
+    </div>
   </div>
 
   <!-- Loading State -->
@@ -91,7 +94,7 @@
 </ion-content>
 
 <!-- Support Dialog -->
-<app-support-dialog *ngIf="showSupportDialog" (close)="closeSupportDialog()"></app-support-dialog>
+<app-support-dialog *ngIf="showSupportDialog" (close)="closeSupportDialog()" (success)="onSupportSuccess($event)"></app-support-dialog>
 
 <div class="footer">
   <div class="footer-content">

@@ -449,10 +449,23 @@
   top: 90px;
   right: 30px;
 }
-#support a {
+#support a,
+#support .support-btn {
   background: rgba(var(--ion-color-warning-rgb), 0.75);
+  display: block;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }
-#support:hover a {
+#support:hover a,
+#support:hover .support-btn {
   background: rgba(var(--ion-color-warning-rgb), 1);
 }
 

@@ -21,6 +21,7 @@ export class HomePage implements OnInit, OnDestroy {
   isPublicStateSwitching = false;
   loadingChampions = new Set<string>();
   isLoadingChampions = true;
+  showSupportDialog = false;
   championListConfig = {
     clickable: true,
     showCheckmarks: true,
@@ -269,5 +270,13 @@ export class HomePage implements OnInit, OnDestroy {
   getThemeButtonText(): string {
     const theme = this.themeService.getCurrentTheme();
     return theme.charAt(0).toUpperCase() + theme.slice(1);
+  }
+
+  openSupportDialog() {
+    this.showSupportDialog = true;
+  }
+
+  closeSupportDialog() {
+    this.showSupportDialog = false;
   }
 }

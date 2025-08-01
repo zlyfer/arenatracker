@@ -72,9 +72,9 @@
 
 <ion-content class="champion-content">
   <div class="click-button" id="support">
-    <a href="mailto:arenatracker@zlyfer.net?subject=Arena Tracker Feedback">
+    <button (click)="openSupportDialog()" class="support-btn">
       <span>Help / Feedback</span>
-    </a>
+    </button>
   </div>
 
   <!-- Loading State -->
@@ -89,6 +89,9 @@
     (championClick)="toggleChampion($event)">
   </app-champion-list>
 </ion-content>
+
+<!-- Support Dialog -->
+<app-support-dialog *ngIf="showSupportDialog" (close)="closeSupportDialog()"></app-support-dialog>
 
 <div class="footer">
   <div class="footer-content">

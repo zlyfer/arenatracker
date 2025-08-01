@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 import { ChampionListComponent } from './components/champion-list.component';
+import { SupportDialogComponent } from './components/support-dialog.component';
 
 @NgModule({
   imports: [
@@ -12,10 +13,12 @@ import { ChampionListComponent } from './components/champion-list.component';
     FormsModule
   ],
   declarations: [
-    ChampionListComponent
+    ChampionListComponent,
+    SupportDialogComponent
   ],
   exports: [
-    ChampionListComponent
+    ChampionListComponent,
+    SupportDialogComponent
   ]
 })
 export class SharedModule {}

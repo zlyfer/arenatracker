@@ -27,7 +27,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   };
 
   // Toggle state for showing completed vs missing champions
-  showCompletedChampions = true;
+  showCompletedChampions = false;
 
   private refreshInterval: Subscription | null = null;
   private subscriptions: Subscription[] = [];
@@ -44,10 +44,10 @@ export class ProfilePage implements OnInit, OnDestroy {
       this.route.queryParams.subscribe(params => {
         this.username = params['username'];
         // Handle toggle state from URL parameter
-        if (params['view'] === 'missing') {
-          this.showCompletedChampions = false;
-        } else {
+        if (params['view'] === 'completed') {
           this.showCompletedChampions = true;
+        } else {
+          this.showCompletedChampions = false; // Default to missing
         }
 
         if (this.username) {

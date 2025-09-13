@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, interval } from 'rxjs';
 import { ChampionService, PublicUserResponse } from '../services/champion.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,18 +26,30 @@ export class ProfilePage implements OnInit, OnDestroy {
     gridColumns: 4,
   };
 
+  // Toggle state for showing completed vs missing champions
+  showCompletedChampions = true;
+
   private refreshInterval: Subscription | null = null;
   private subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private championService: ChampionService
+    private router: Router,
+    private championService: ChampionService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
     this.subscriptions.push(
       this.route.queryParams.subscribe(params => {
         this.username = params['username'];
+        // Handle toggle state from URL parameter
+        if (params['view'] === 'missing') {
+          this.showCompletedChampions = false;
+        } else {
+          this.showCompletedChampions = true;
+        }
+
         if (this.username) {
           this.initializePublicProfile();
           this.startAutoRefresh();
@@ -159,5 +172,62 @@ export class ProfilePage implements OnInit, OnDestroy {
     // Force change detection by creating a new array
     const reversed = [...this.user.champs].reverse();
     return reversed;
+  }
+
+  cycleTheme() {
+    this.themeService.cycleTheme();
+  }
+
+  getThemeButtonText(): string {
+    const theme = this.themeService.getCurrentTheme();
+    return theme.charAt(0).toUpperCase() + theme.slice(1);
+  }
+
+  // Get champions based on toggle state
+  getFilteredChampions(): string[] {
+    if (!this.user || !this.champions.length) return [];
+
+    if (this.showCompletedChampions) {
+      // Show completed champions (owned by user)
+      return [...this.user.champs].reverse();
+    } else {
+      // Show missing champions (not owned by user)
+      return this.champions.filter(champion => !this.user.champs.includes(champion));
+    }
+  }
+
+  // Toggle between completed and missing champions
+  toggleChampionView() {
+    this.showCompletedChampions = !this.showCompletedChampions;
+    this.updateUrl();
+  }
+
+  // Handle segment change
+  onSegmentChange(event: any) {
+    this.showCompletedChampions = event.detail.value === 'true';
+    this.updateUrl();
+  }
+
+  // Update URL with current toggle state
+  private updateUrl() {
+    const queryParams = {
+      username: this.username,
+      view: this.showCompletedChampions ? 'completed' : 'missing'
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  // Get count for current view
+  getCurrentViewCount(): number {
+    if (this.showCompletedChampions) {
+      return this.user ? this.user.champs.length : 0;
+    } else {
+      return this.champions.length - (this.user ? this.user.champs.length : 0);
+    }
   }
 }

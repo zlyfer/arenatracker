@@ -1,3 +1,46 @@
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+
+
+.topbar-btn {
+  --background: var(--ion-color-step-50);
+  --color: var(--ion-text-color);
+  --border-radius: 5px;
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: var(--ion-color-step-200);
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: none;
+  transition: background-color 0.2s;
+  height: 42px;
+  margin: 0 0px;
+  min-width: 100px;
+}
+
+.topbar-btn:hover {
+  --background: var(--ion-color-step-150);
+}
+
+.github-btn {
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  font-size: 9px;
+}
+
+.github-btn:visited {
+  --color: var(--ion-text-color);
+}
+
 .profile-container {
   padding: 20px;
   max-width: 1200px;
@@ -51,10 +94,11 @@
 
 .profile-content {
   .user-info-section {
-    background: rgba(var(--ion-color-light-rgb), 0.8);
-    border-radius: 12px;
+    background: rgba(var(--ion-color-step-150-rgb), 0.8);
+    border-radius: 20px 20px 10px 10px;
+    border: 1px solid var(--ion-color-step-200);
     padding: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 4px;
     position: sticky;
     top: 24px;
     z-index: 10;
@@ -130,11 +174,52 @@
   }
 
   .champions-section {
-    h2 {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
-      margin-bottom: 16px;
+    .champions-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+        margin: 0;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      ion-segment {
+        --background: rgba(var(--ion-color-step-150-rgb), 0.8);
+        --indicator-color: var(--ion-color-primary);
+        --indicator-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 4px;
+        min-width: 200px;
+        border-radius: 10px 10px 20px 20px;
+        border: 1px solid var(--ion-color-step-200);
+
+        ion-segment-button {
+          --color: var(--ion-color-medium);
+          --color-checked: var(--ion-color-primary);
+          --background-checked: transparent;
+          --indicator-color: transparent;
+          font-weight: 500;
+          font-size: 14px;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+
+          &:hover {
+            --color: var(--ion-color-dark);
+          }
+
+          &.segment-button-checked {
+            --color: var(--ion-color-primary);
+            --background: rgba(var(--ion-color-primary-rgb), 0.1);
+          }
+        }
+      }
     }
   }
 
@@ -191,7 +276,23 @@
     }
 
     .champions-section {
-      // Champion list component handles its own responsive design
+      .champions-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+
+        h2 {
+          min-width: auto;
+          margin-bottom: 12px;
+        }
+
+        ion-segment {
+          min-width: auto;
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+      }
     }
   }
 }
@@ -232,6 +333,21 @@
 
         .progress-text {
           font-size: 12px;
+        }
+      }
+    }
+
+    .champions-section {
+      .champions-header {
+        h2 {
+          font-size: 18px;
+        }
+
+        ion-segment {
+          ion-segment-button {
+            font-size: 12px;
+            padding: 8px 12px;
+          }
         }
       }
     }

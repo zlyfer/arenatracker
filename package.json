@@ -8,7 +8,7 @@
     "run-android": "ionic serve --no-open --configuration=app",
     "run-android_": "ionic cap run android -l --external --configuration=app",
     "run-ios": "ionic cap run ios -l --external --configuration=app",
-    "run-freddy": "ionic cap run android -l --external --public-host=freddypc --target=2748e267 --configuration=app",
+    "freddy": "ionic cap run android -l --external --public-host=freddypc --target=55150DLAQ001GP --configuration=app",
     "build-website": "npm run preBuild && npx ionic build --configuration=production",
     "build-android": "npm run preBuild && npx ionic build --configuration=app.production && npx cap copy",
     "build-android_": "ionic build --configuration=app.production && ionic cap build android",
